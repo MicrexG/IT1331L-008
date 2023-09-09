@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-    
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -79,11 +78,34 @@
         min="0"
         placeholder="Enter pitch..."
       />
-      <button>Generate Speech</button>
+      <button onClick="loadPlayer()">Generate Speech</button>
       <br />
       <div id="speech-player"></div>
     </div>
+
+    <script>
+      let loadPlayer = async () => {
+        const voiceCode =
+          document.querySelector('input[name="gender"]:checked').value ===
+          "male"
+            ? "fil-PH-1"
+            : "fil-PH-2";
+        const message = document.getElementById("message").value;
+        const speed = document.getElementById("speed").value;
+        const pitch = document.getElementById("pitch").value;
+        console.log("voiceCode=", voiceCode);
+        //print message, speed and pitch here.
+      };
+
+      let generateSpeech = async (voiceCode, speed, pitch, message) => {
+        body: new URLSearchParams({
+          voice_code: voiceCode,
+          text: message,
+          speed: speed,
+          pitch: pitch,
+          output_type: "audio_url",
+        });
+      };
+    </script>
   </body>
-
-
 </html>
